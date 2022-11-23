@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Images Manager</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+    <div class="mainContainer">
+        <div class="headerPanel">
+            <div class="container">
+                <header
+                    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+                    <div>
+                        <img id="apropos" src="favicon.ico" alt="" data-toggle="tooltip" class="favicon" title="Gestionnaire d'images - Auteur Nicolas Chourot - Modifier par Ollyvier Caron-Blondin - Collège Lionel-Groulx">
+                        <span class="header">Gestionnaire d'images </span>
+                            <div class="cmd fa-solid fa-square-plus mx-2" id="newImageCmd" title="Ajouter une image"data-toggle="tooltip"></div>
+                            <div class="cmd fa-solid fa-arrow-down-wide-short mx-2" id="orderBy" title="Changer l'ordre d'affichage"data-toggle="tooltip"></div>
+                            <div class="cmd fa-solid fa-magnifying-glass-plus mx-2" id="searchBarBtn" title="Afficher/Cacher la barre de recherche"data-toggle="tooltip"></div>
+                    </div>
+                    <div class="col text-end" id="loginActions">
+                        <span id="sectionProfil">
+                            <img src="" alt="profilePic" class="profilePicture rounded-circle border mx-2" id="profilePic">
+                            <span id="name" class="mx-2"></span>
+                        </span>
+                        <div class="col text-danger cmd fa-solid fa-circle-exclamation mx-2" id="verifyCmd" title="Votre courriel n'est pas vérifié. Cliquer ici pour le vérifier maintenant."data-toggle="tooltip" style="font-size: 20px;"></div>
+                        <div class="col cmd fa-solid fa-right-to-bracket mx-2" id="loginCmd" title="Se connecter"data-toggle="tooltip" style="font-size: 20px;"></div>
+                        <div class="col cmd fa-solid fa-user-plus mx-2" id="registerCmd" title="S'enregistrer"data-toggle="tooltip" style="font-size: 20px;"></div>
+                        <div class="col cmd fa fa-sign-out mx-2" id="logoutCmd" title="Se déconnecter" data-toggle="tooltip" style="font-size: 20px;"></div>
+                    </div>
+                </header>
+                <div id="searchBar">
+                    <div class="searchBarLayout">
+                        <select id="searchName" class="form-control">
+                            <!-- filled programmatically-->
+                        </select>
+                        <span>
+                            <!-- skip a column -->
+                        </span>
+                        <input list="datalistKeywords" type="search" id="searchKeywords" class="form-control" placeholder="Recherche de mots clés" />
+                        <datalist id="datalistKeywords">
+                        </datalist>
+                        <span>
+                            <!-- skip a column -->
+                        </span>
+                        <span class="cmd fa-solid fa-arrow-right" title="Rechercher"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scrollContainer">
+            <div id="imagesList">
+                <!-- filled programmatically-->
+            </div>
+        </div>
+        <div>
+            <div id="imageDlg">
+                <form id="imageForm">
+                    <input type="hidden" id="Id_input" value="0">
+                    <input type="hidden" id="date_input" value="0">
+                    <input type="hidden" id="GUID_input" value="">
+                    <input type="hidden" id="Image_UserId" value="0">
+                    <input type="hidden" id="hashtag" value="">
+
+                    <label for="title_input">Titre</label>
+                    <input type="text" id="title_input" class="form-control" required>
+
+                    <label for="decription_input">Description</label>
+                    <textarea id="description_input" class="form-control" required></textarea>
+
+                    <label for="image">Image</label>
+                    <div id='image' class='ImageUploader' defaultImage='images/No_Image.png'
+                        waitingImage='images/writing.gif'>
+                    </div>
+                    <div class="note">Cliquez-Déposez une image</div>
+                    <div>
+                        <input type="checkbox" name="shared" id="shared">
+                        <label for="shared">Partager publiquement cette image</label>
+                    </div>
+                </form>
+            </div>
+
+            <div id="confirmDeleteDlg">
+                <span id="confirmationMessage"></span>
+            </div>
+            <div id="errorDlg">
+                <span id="errorMessage"></span>
+            </div>
+
+        </div>
+        <div id="loginDlg">
+            <form id="loginForm">
+                <label for="email_input">Courriel</label>
+                <input type="text" id="email_input" class="form-control" required>
+
+                <label for="password_input">Mot de passe</label>
+                <input type="password" id="password_input" class="form-control" required>
+
+                <input type="checkbox" name="rememberme" id="rememberme">
+                <label for="rememberme">Se souvenir de moi</label>
+            </form>
+        </div>
+
+        <div id="registerDlg">
+            <form id="registerForm">
+                <input type="hidden" id="Id_input_register" value="0">
+                <input type="hidden" id="date_input_register" value="0">
+                <input type="hidden" id="GUID_input_register" value="">
+
+                <label for="username_input">Nom d'usager</label>
+                <input type="text" id="username_input" class="form-control" required>
+
+                <label for="email_register_input">Courriel</label>
+                <input type="text" id="email_register_input" class="form-control" required>
+
+                <label for="password_register_input">Mot de passe</label>
+                <input class="MatchedPassword form-control" matchedPasswordId="password_register_input2" type="password"
+                    id="password_register_input" required>
+
+                <label for="password_register_input2">Confirmation</label>
+                <input class="form-control" type="password" id="password_register_input2">
+
+                <label for="avatar">Avatar</label>
+                <div id='avatar' class='ImageUploader' defaultImage='images/No_Avatar.png'
+                    waitingImage='images/writing.gif'>
+                </div>
+                <div class="note">Cliquez-Déposez une image</div>
+            </form>
+        </div>
+        <div id="verifyCodeDlg">
+            <span>Consultez votre boite de courriel pour connaitre votre code de vérification et inscrivez-le
+                ci-dessous</span>
+            <form id="verifyCodeForm">
+                <label for="verifyCode_input">Code de vérification</label>
+                <input type="text" id="verifyCode_input" class="form-control" required>
+            </form>
+        </div>
+        <div id="confirmDeleteUserDlg">
+            <span id="confirmationMessageUser">Voulez-vous vraiment vous désinscrire? Vous allez perdre toutes vos images.</span>
+        </div>
+        <div id="imageNewsDlg">
+            <div>
+                <div>
+                    <h5 style="font-weight: bold;" id="imageTitleDlg"></h5>
+                </div>
+                <img src="" alt="image" id="newsImageDlg" style="width: 600px;">
+                <div class="imageDate" id="imageDateDlg"></div> 
+                <div id="imageDescDlg"></div>
+            </div>
+        </div>
+        <div id="aproposDlg">
+            <div class="text-center fs-6">
+                <div class="fs-3">Gestionnaire d'images</div>
+                <div>Auteur original: Nicolas Chourot</div>
+                <div>Modifié par: Ollyvier Caron-Blondin</div>
+                <div>PFI du cours KBG Service Web</div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <script src="js/customValidation.js"></script>
+    <script src="js/imageUploader.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/date.js"></script>
+    <script defer>
+        const periodicRefreshPeriod = 15;
+        let holdCheckETag = false;
+        let currentETag = "";
+        let createMode = true;
+        let registerMode = true;
+        let searchName = "";
+        let searchKeywords = "";
+        let hideSearchBar = true;
+        let orderByAsc = false;
+        let imageIdToDelete = 0; // used by confirmDeleteDlg
+        let userToDelete = 0;
+        let selectedName = "";
+        let imagesCount = 50;
+        let appendCount = 3;
+        let previousScrollPosition = 0;
+        let appendMode = false;
+        let rememberme = false;
+
+        init_UI();
+        HEAD(checkETag, error);
+        setInterval(() => { HEAD(checkETag, error) }, periodicRefreshPeriod * 1000);
+
+        function checkETag(ETag) {
+            if (!holdCheckETag && ETag != currentETag) {
+                currentETag = ETag;
+                getImagesList();
+            }
+        }
+
+        function getImagesList(refresh = true) {
+            appendMode = !refresh;
+            function prepareQueryString() {
+                let queryString = "";
+                let sortString = "sort=Date," + (orderByAsc ? "asc" : "desc");
+                if (appendMode) {
+                    queryString = `?${sortString}&offset=${Math.trunc(imagesCount / appendCount)}&limit=${appendCount}`;
+                    imagesCount += appendCount;
+                } else {
+                    queryString = `?${sortString}&offset=${0}&limit=${imagesCount}`;
+                }
+                if (!hideSearchBar) {
+                        selectedName = $("#searchName").val();
+                        let searchKeywords = $("#searchKeywords").val();
+                        if (selectedName != "")
+                            queryString += "&UserId=" + selectedName;
+                        if (searchKeywords != ""){
+                            queryString += "&Keywords=" + searchKeywords+"";
+                            let datalistWords = localStorage.getItem("datalistKeywords");
+                            if(!datalistWords.includes(searchKeywords)){
+                                datalistWords+="-"+searchKeywords;
+                                localStorage.setItem("datalistKeywords",datalistWords);
+                                addToDatalist(searchKeywords);
+                            }
+                        }
+                    }
+                return queryString;
+            }
+            GET_ALL(refreshimagesList, error, prepareQueryString());
+            GET_ALL(refreshUsersList, error, "?fields=UserId");
+        }
+        function refreshimagesList(images, ETag) {
+            function insertIntoImageList(image) {
+                let user = null;
+                if(localStorage.getItem("User")){
+                    user = JSON.parse(localStorage.getItem("User"));
+                }
+                if(image.UserId == localStorage.getItem("UserId") && user.VerifyCode == "verified"){
+                    let imgStyle = "position: absolute;top: 32px;left: 0px; width:50px;height:50px; display:none"
+                    if(image.Shared){
+                        imgStyle = "position: absolute;top: 32px;left: 0px; width:50px;height:50px";
+                    }
+                    $("#imagesList").append(
+                    $(` 
+                                <div class='imageLayout'>
+                                    <div class='imageHeader'>
+                                        <div class="imageTitle">${image.Title}</div>
+                                        <div    class="cmd editCmd  fa fa-pencil-square"
+                                                imageid="${image.Id}" 
+                                                title="Editer ${image.Title}" 
+                                                data-toggle="tooltip">
+                                        </div>
+                                        <div    class="cmd deleteCmd fa fa-window-close"
+                                                imageid="${image.Id}" 
+                                                title="Effacer ${image.Title}" 
+                                                data-toggle="tooltip">
+                                        </div>
+                                    </div>
+                                    <div imageid="${image.Id}"   class='image imageNews' 
+                                            style="background-image:url('${image.ThumbnailURL}')">
+                                            <img src="images/shared.png" title="Image public" alt="avatar" style="${imgStyle}">
+                                    </div>
+                                    <div class="imageDate">${convertToFrenchDate(parseInt(image.Date))}</div>
+                                </div>`)
+                    );
+                }
+                else if(image.UserId == localStorage.getItem("UserId") && user.VerifyCode != "verified"){
+                    let imgStyle = "position: absolute;top: 32px;left: 0px; width:50px;height:50px; display:none"
+                    if(image.Shared){
+                        imgStyle = "position: absolute;top: 32px;left: 0px; width:50px;height:50px";
+                    }
+                    $("#imagesList").append(
+                    $(` 
+                                <div class='imageLayout'>
+                                    <div class='imageHeader'>
+                                        <div class="imageTitle">${image.Title}</div>
+                                    </div>
+                                    <div imageid="${image.Id}"   class='image imageNews' 
+                                            style="background-image:url('${image.ThumbnailURL}')">
+                                            <img src="images/shared.png" title="Image public" alt="avatar" style="${imgStyle}">
+                                    </div>
+                                    <div class="imageDate">${convertToFrenchDate(parseInt(image.Date))}</div>
+                                </div>`)
+                    );
+                }
+                else{
+                    if(image.Shared){
+                        $("#imagesList").append(
+                            $(`
+                                <div class='imageLayout'>
+                                    <div class='imageHeader'>
+                                        <div class="imageTitle">${image.Title}</div>
+                                    </div>
+                                    <div imageid="${image.Id}"   class='image imageNews'
+                                            style="background-image:url('${image.ThumbnailURL}')">
+                                            <img src="${image.AvatarURL}" title="${image.Username}" alt="avatar" class="rounded-circle border border-dark" style="position: absolute;top: 32px;left: 0px; width:50px;height:50px">
+                                    </div>
+                                    <div class="imageDate">${convertToFrenchDate(parseInt(image.Date))}</div>
+                                </div>`)
+                                );
+                    }
+                }
+            }
+            currentETag = ETag;
+            previousScrollPosition = $(".scrollContainer").scrollTop();
+            if (!appendMode) $("#imagesList").empty();
+
+            if (appendMode && images.length == 0)
+                imagesCount -= appendCount;
+
+            for (let image of images) {
+                insertIntoImageList(image);
+            }
+
+            $(".scrollContainer").scrollTop(previousScrollPosition);
+            $(".editCmd").off();
+            $(".deleteCmd").off();
+            $(".showMore").off();
+            $(".editCmd").click(e => { editimage(e) });
+            $(".deleteCmd").click(e => { deleteimage(e) });
+            $(".imageNews").click(e => { showNouvelleDlg(e) });
+
+            $('[data-toggle="tooltip"]').tooltip();
+        }
+        function refreshUsersList(users) {
+            function setUserListValue(user){
+                let name = user.Name;
+                let selected = (selectedName == user.Id ? " selected " : "");
+                if(localStorage.getItem("UserId") != user.Id){
+                    $("#searchName").append(`<option value='${user.Id}' ${selected}>${name}</option>`);
+                }
+            }   
+            $("#searchName").empty();
+            $("#searchName").append("<option value=''>Toutes les usagers</option>");
+            if(localStorage.getItem("UserId")){
+                let selected = (selectedName == localStorage.getItem("UserId") ? " selected " : "");
+                $("#searchName").append(`<option value='${localStorage.getItem("UserId")}' ${selected}>Mes images</option>`);
+            }
+            for (let item of users) {
+                GETUSER(item.UserId,setUserListValue,error);
+            }
+        }
+        function error(status) {
+            let errorMessage = "";
+            switch (status) {
+                case 0:
+                    errorMessage = "Le service ne répond pas";
+                    break;
+                case 401:
+                    errorMessage = "Requête non autorisée";
+                    break;
+                case 400:
+                case 422:
+                    errorMessage = "Requête invalide";
+                    break;
+                case 404:
+                    errorMessage = "Service ou données introuvables";
+                    break;
+                case 409:
+                    errorMessage = "Conflits de données: Hyperlien existe déjà";
+                    break;
+                case 500:
+                    errorMessage = "Erreur interne du service";
+                    break;
+                default:
+                    errorMessage = "Une erreur est survenue";
+                    break;
+            }
+            $("#errorMessage").text(errorMessage);
+            $("#errorDlg").dialog('open');
+        }
+        function refreshDatalist(){
+            if(localStorage.getItem("datalistKeywords")){
+                let datalistKeywords = localStorage.getItem("datalistKeywords").split("-");
+                for(let keyword of datalistKeywords){
+                    $("#datalistKeywords").append($(`<option value="${keyword}">`));
+                }
+            }
+            else{
+                let datalistKeywords = [];
+                localStorage.setItem("datalistKeywords",datalistKeywords);
+            }
+        }
+        function addToDatalist(keyword){
+                $("#datalistKeywords").append($(`<option value="${keyword}">`));
+        }
+
+        function newImage() {
+            holdCheckETag = true;
+            createMode = true;
+            resetimageForm();
+            ImageUploader.imageRequired('image', true);
+            $("#imageDlg").dialog('option', 'title', "Ajout d'image");
+            $("#imageDlgOkBtn").text("Ajouter");
+            $("#imageDlg").dialog('open');
+        }
+        function editimage(e) {
+            holdCheckETag = true;
+            createMode = false;
+            GET_ID(e.target.getAttribute("imageid"), imageToForm, error);
+            holdCheckETag = true;
+            ImageUploader.imageRequired('image', false);
+            $("#imageDlg").dialog('option', 'title', "Modification d'image");
+            $("#imageDlgOkBtn").text("Modifier");
+            $("#imageDlg").dialog('open');
+        }
+        function deleteimage(e) {
+            holdCheckETag = true;
+            imageIdToDelete = e.target.getAttribute("imageid")
+            GET_ID(
+                imageIdToDelete,
+                image => {
+                    $("#confirmationMessage").html("Voulez-vous vraiment effacer l'image <br><b>" + image.Title + "</b>?")
+                },
+                error
+            );
+            holdCheckETag = true;
+            $("#confirmUserDlg").dialog('option', 'title', "Retrait d'image'...");
+            $("#confirmDeleteDlgOkBtn").text("Effacer");
+            $("#confirmDeleteDlg").dialog('open');
+        }
+        function resetimageForm() {
+            $("#Id_input").val("0");
+            $("#Image_UserId").val(localStorage.getItem("UserId"));
+            $("#GUID_input").val("");
+            $("#date_input").val(Date.now());
+            $("#title_input").val("");
+            $("#description_input").val("");
+            $("#shared").prop("checked",false);
+            $("#hastag").val("");
+            ImageUploader.resetImage('image');
+        }
+
+        function imageFromForm() {
+            if ($("#imageForm")[0].checkValidity()) {
+                let image = {
+                    Id: parseInt($("#Id_input").val()),
+                    GUID: $("#GUID_input").val(),
+                    Title: $("#title_input").val(),
+                    Description: $("#description_input").val(),
+                    ImageData: ImageUploader.getImageData('image'),
+                    Date: parseInt($("#date_input").val()),
+                    UserId: parseInt($("#Image_UserId").val()),
+                    Shared: $("#shared").prop("checked"),
+                    Hashtag: $("#title_input").val() +" "+ $("#description_input").val()
+                };
+                return image;
+            } else {
+                $("#imageForm")[0].reportValidity()
+            }
+            return false;
+        }
+        function imageToForm(image) {
+            $("#Id_input").val(image.Id);
+            $("#GUID_input").val(image.GUID);
+            $("#date_input").val(image.Date);
+            //$("#date_input").val(Date.now());
+            $("#title_input").val(image.Title);
+            $("#description_input").val(image.Description);
+            ImageUploader.setImage('image', image.OriginalURL);
+            $("#Image_UserId").val(image.UserId)
+            $("#shared").prop("checked",image.Shared)
+            $("#hashtag").val(image.Title + image.Description);
+        }
+
+        function showAboutDlg(){
+            holdCheckETag = true;
+            $("#aproposDlg").dialog('open');
+        }
+
+        // REGISTER
+        function register() {
+            holdCheckETag = true;
+            registerMode = true;
+            resetRegisterForm();
+            ImageUploader.imageRequired('avatar', true);
+            $("#registerDlg").dialog('option', 'title', "Création de compte");
+            $("#registerDlgOkBtn").text("Créer");
+            $("#registerDlg").dialog('open');
+        }
+        function resetRegisterForm() {
+            $("#username_input").val("");
+            $("#email_register_input").val("");
+            $("#password_register_input").val("");
+            $("#password_register_input").prop('required',true);
+            $("#password_register_input2").val("");
+            $("#GUID_input_register").val("");
+            $("#Id_input_register").val("0");
+            $("#date_input_register").val(Date.now());
+            $("#deleteUserDlgOkBtn").hide();
+            ImageUploader.resetImage('avatar');
+        }
+        function userFromForm() {
+            if ($("#registerForm")[0].checkValidity()) {
+                let user = {
+                    Id: parseInt($("#Id_input_register").val()),
+                    AvatarGUID: $("#GUID_input_register").val(),
+                    Name: $("#username_input").val(),
+                    Email: $("#email_register_input").val(),
+                    Password: $("#password_register_input").val(),
+                    ImageData: ImageUploader.getImageData('avatar')
+                };
+                return user;
+            } else {
+                $("#registerForm")[0].reportValidity();
+            }
+            return false;
+        }
+        function userToForm(user) {
+            $("#username_input").val(user.Name);
+            $("#email_register_input").val(user.Email);
+            $("#password_register_input").val("");
+            $("#password_register_input2").val("");
+            $("#GUID_input_register").val(user.AvatarGUID);
+            $("#Id_input_register").val(user.Id);
+            $("#date_input_register").val(user.Created);
+            ImageUploader.setImage('avatar', user.AvatarURL);
+            $("#deleteUserDlgOkBtn").show();
+        }
+
+        // LOGIN
+        function login() {
+            holdCheckETag = true;
+            resetloginForm();
+            $("#loginDlg").dialog('option', 'title', "Connexion");
+            $("#loginDlg").dialog('open');
+        }
+        function resetloginForm() {
+            if (localStorage.getItem("Email")) {
+                $("#email_input").val(localStorage.getItem("Email"));
+                if (localStorage.getItem("Password")) {
+                    $("#password_input").val(localStorage.getItem("Password"));
+                }
+            }
+            else {
+                $("#email_input").val("");
+                $("#password_input").val("");
+            }
+            $("#rememberme").prop("checked", rememberme)
+        }
+        function loginFromForm() {
+            if ($("#loginForm")[0].checkValidity()) {
+                let login = {
+                    Email: $("#email_input").val(),
+                    Password: $("#password_input").val(),
+                };
+                return login;
+            } else {
+                $("#loginForm")[0].reportValidity()
+            }
+            return false;
+        }
+        function setLocalUserLoginInfo(email, password) {
+            localStorage.setItem("Email", email);
+            localStorage.setItem("Password", password);
+        }
+        function showUserInfo() {
+            let user = JSON.parse(localStorage.getItem("User"));
+            $("#loginCmd").hide();
+            $("#registerCmd").hide();
+            $("#logoutCmd").show();
+
+            if(user.VerifyCode != "verified"){
+                $("#verifyCmd").show();
+                $("#newImageCmd").hide();
+            }
+            else{
+                $("#verifyCmd").hide();
+                $("#newImageCmd").show();
+            }
+
+            $("#name").text(user.Name);
+            $("#name").show();
+
+            $("#profilePic").attr("src", user.AvatarURL);
+            $("#profilePic").show();
+            getImagesList(true);
+        }
+
+        // VERIFY CODE
+        function verifycode() {
+            holdCheckETag = true;
+            resetverifycodeForm();
+            $("#verifyCodeDlg").dialog('option', 'title', "Vérification de courriel");
+            $("#verifyCodeDlg").dialog('open');
+        }
+        function resetverifycodeForm() {
+            $("#verifyCode_input").val("");
+        }
+        function setRegisterId(user) {
+            localStorage.setItem("UserId",user.Id);
+        }
+        function getRegisterId() {
+            return localStorage.getItem("UserId");
+        }
+        function getVerifyCode() {
+            return $("#verifyCode_input").val();
+        }
+
+        // LOGOUT
+        function logout() {
+            LOGOUT(localStorage.getItem("UserId"), resetHeaderActions, error);
+            localStorage.removeItem("User");
+            localStorage.removeItem("Access_token");
+            localStorage.removeItem("UserId");
+        }
+        function resetHeaderActions() {
+            $("#loginCmd").show();
+            $("#registerCmd").show();
+            $("#logoutCmd").hide();
+            $("#newImageCmd").hide();
+            $("#newImageCmd").hide();
+            $("#verifyCmd").hide();
+
+            $("#name").text("");
+            $("#name").hide();
+
+            $("#profilePic").attr("src", "");
+            $("#profilePic").hide();
+
+            getImagesList(true);
+        }
+
+        // MODIFICATION DE COMPTE
+        function modifierProfil(){
+            holdCheckETag = true;
+            registerMode = false;
+            GETUSER_ID(localStorage.getItem("UserId"), userToForm, error);
+            ImageUploader.imageRequired('avatar', false);
+            $("#password_register_input").prop('required',false);
+            $("#registerDlg").dialog('option', 'title', "Modification de profil");
+            $("#registerDlgOkBtn").text("Modifier");
+            $("#registerDlg").dialog('open');
+        }
+        function deleteUser() {
+            holdCheckETag = true;
+            userToDelete = localStorage.getItem("UserId");
+            
+            holdCheckETag = true;
+            $("#confirmDeleteUserDlg").dialog('open');
+        }
+
+        // Dialog des nouvelles
+        function showNouvelleDlg(e){
+            holdCheckETag = true;
+            GET_ID(e.target.getAttribute("imageid"), imageToDialog, error);
+            $("#imageNewsDlg").dialog('open');
+        }
+        function imageToDialog(image){
+            $("#imageTitleDlg").text(image.Title);
+            $("#imageDateDlg").text(convertToFrenchDate(parseInt(image.Date)));
+            $("#imageDescDlg").text(image.Description);
+            $("#newsImageDlg").attr("src",image.OriginalURL);
+        }
+        function resetImageNewsDlg(){
+            $("#imageTitleDlg").text("");
+            $("#imageDateDlg").text("");
+            $("#imageDescDlg").text("");
+            $("#newsImageDlg").attr("src","");
+        }
+
+        function init_UI() {
+            if (localStorage.getItem("User")) {
+                showUserInfo();
+            }
+            else {
+                resetHeaderActions();
+            }
+
+            refreshDatalist();
+
+            $("#newImageCmd").click(newImage);
+            $("#loginCmd").click(login);
+            $("#registerCmd").click(register);
+            $("#logoutCmd").click(logout);
+            $("#sectionProfil").click(modifierProfil);
+            $("#apropos").click(showAboutDlg);
+            $(".fa-arrow-right").click(e => { getImagesList() })
+            $("#verifyCmd").click(verifycode);
+
+            $("#searchBar").hide(); // Hidden by default
+
+            $(".fa-magnifying-glass-plus").click(e => {
+                hideSearchBar = !hideSearchBar;
+                if (hideSearchBar){
+                    $("#searchBar").hide();
+                }
+                else{
+                    $("#searchBar").show();
+                }
+                getImagesList();
+            })
+
+            $(".fa-arrow-down-wide-short").click(e => {
+                orderByAsc = !orderByAsc;
+                getImagesList();
+            })
+
+            $("#imageDlg").dialog({
+                title: "...",
+                autoOpen: false,
+                modal: true,
+                show: { effect: 'fade', speed: 400 },
+                hide: { effect: 'fade', speed: 400 },
+                width: 640,
+                minWidth: 640,
+                maxWidth: 640,
+                height: 800,
+                minHeight: 780,
+                maxHeight: 780,
+                position: { my: "top", at: "top", of: window },
+                buttons: [{
+                    id: "imageDlgOkBtn",
+                    text: "Title will be changed dynamically",
+                    click: function () {
+                        let image = imageFromForm();
+                        if (image) {
+                            if (createMode) {
+                                POST(image, getImagesList, error);
+                                $(".scrollContainer").scrollTop(0);
+                            }
+                            else
+                                PUT(image, getImagesList, error);
+                            resetimageForm();
+                            holdCheckETag = false;
+                            $(this).dialog("close");
+                        }
+                    }
+                },
+                {
+                    text: "Annuler",
+                    click: function () {
+                        holdCheckETag = false;
+                        $(this).dialog("close");
+                    }
+                }]
+            });
+
+            $("#loginDlg").dialog({
+                title: "...",
+                autoOpen: false,
+                modal: true,
+                show: { effect: 'fade', speed: 400 },
+                hide: { effect: 'fade', speed: 400 },
+                width: 380,
+                minWidth: 380,
+                maxWidth: 380,
+                height: 380,
+                minHeight: 780,
+                maxHeight: 780,
+                position: { my: "top", at: "top", of: window },
+                buttons: [{
+                    id: "loginDlgOkBtn",
+                    text: "Connexion",
+                    click: function () {
+                        let login = loginFromForm();
+                        rememberme = $('#rememberme').prop('checked');
+                        if (login) {
+                            LOGIN(login, showUserInfo, error);
+                            if (rememberme)
+                                setLocalUserLoginInfo(login.Email, login.Password)
+                            resetloginForm();
+                            holdCheckETag = false;
+                            $(this).dialog("close");
+                        }
+                    }
+                },
+                {
+                    text: "Annuler",
+                    click: function () {
+                        holdCheckETag = false;
+                        $(this).dialog("close");
+                    }
+                }]
+            });
+
+            $("#registerDlg").dialog({
+                title: "...",
+                autoOpen: false,
+                modal: true,
+                show: { effect: 'fade', speed: 400 },
+                hide: { effect: 'fade', speed: 400 },
+                width: 380,
+                minWidth: 640,
+                maxWidth: 640,
+                height: 800,
+                minHeight: 780,
+                maxHeight: 780,
+                position: { my: "top", at: "top", of: window },
+                buttons: [{
+                    id: "deleteUserDlgOkBtn",
+                    text: "Se désinscrire",
+                    click: function () {
+                        deleteUser();
+                        $(this).dialog("close");
+                    }
+                },
+                {
+                    id: "registerDlgOkBtn",
+                    text: "Title will be changed dynamically",
+                    click: function () {
+                        let user = userFromForm();
+                        if (user) {
+                            if (registerMode) {
+                                REGISTER(user, setRegisterId, error);
+                                verifycode();
+                            }
+                            else {
+                                let oldUser = JSON.parse(localStorage.getItem("User"));
+                                USERPUT(user, showUserInfo, error);
+                                if(user.Email != oldUser.Email){
+                                    verifycode();
+                                }
+                            }
+                            holdCheckETag = false;
+                            $(this).dialog("close");
+                        }
+                    }
+                },
+                {
+                    text: "Annuler",
+                    click: function () {
+                        holdCheckETag = false;
+                        $(this).dialog("close");
+                    }
+                }]
+            });
+
+            $("#verifyCodeDlg").dialog({
+                title: "...",
+                autoOpen: false,
+                modal: true,
+                show: { effect: 'fade', speed: 400 },
+                hide: { effect: 'fade', speed: 400 },
+                width: 380,
+                height: 330,
+                position: { my: "top", at: "top", of: window },
+                buttons: [{
+                    id: "verifycodeDlgOkBtn",
+                    text: "Envoyer",
+                    click: function () {
+                        let id = getRegisterId();
+                        let code = getVerifyCode();
+                        if (id) {
+                            if(localStorage.getItem("User")){ // Si est déja connecter (modification de son email)
+                                VERIFYCODE(id, code, showUserInfo, verifycode);
+                            }
+                            else{
+                                VERIFYCODE(id, code, login, verifycode);
+                            }
+                            holdCheckETag = false;
+                            $(this).dialog("close");
+                        }
+                        resetRegisterForm();
+                    }
+                },
+                {
+                    text: "Annuler",
+                    click: function () {
+                        holdCheckETag = false;
+                        $(this).dialog("close");
+                    }
+                }]
+            });
+
+            $("#confirmDeleteUserDlg").dialog({
+                title: "Attention!",
+                autoOpen: false,
+                modal: true,
+                show: { effect: 'fade', speed: 400 },
+                hide: { effect: 'fade', speed: 400 },
+                width: 500, minWidth: 500, maxWidth: 500,
+                height: 230, minHeight: 230, maxHeight: 230,
+                position: { my: "top", at: "top", of: window },
+                buttons: [{
+                    id: "confirmDeleteUserDlgOkBtn",
+                    text: "Oui",
+                    click: function () {
+                        if (userToDelete){
+                            DELETEUSER(userToDelete,logout,error);
+                        }
+                        userToDelete = 0;
+                        holdCheckETag = false;
+                        $(this).dialog("close");
+                    }
+                },
+                {
+                    text: "Annuler",
+                    click: function () {
+                        holdCheckETag = false;
+                        userToDelete = 0;
+                        $(this).dialog("close");
+                    }
+                }]
+            });
+
+            $("#confirmDeleteDlg").dialog({
+                title: "Attention!",
+                autoOpen: false,
+                modal: true,
+                show: { effect: 'fade', speed: 400 },
+                hide: { effect: 'fade', speed: 400 },
+                width: 500, minWidth: 500, maxWidth: 500,
+                height: 230, minHeight: 230, maxHeight: 230,
+                position: { my: "top", at: "top", of: window },
+                buttons: [{
+                    id: "confirmDeleteDlgOkBtn",
+                    text: "Oui",
+                    click: function () {
+                        holdCheckETag = false;
+                        if (imageIdToDelete)
+                            DELETE(imageIdToDelete, getImagesList, error);
+                        imageIdToDelete = 0;
+                        $(this).dialog("close");
+                    }
+                },
+                {
+                    text: "Annuler",
+                    click: function () {
+                        holdCheckETag = false;
+                        imageIdToDelete = 0;
+                        $(this).dialog("close");
+                    }
+                }]
+            });
+
+            $("#errorDlg").dialog({
+                title: "Erreur...",
+                autoOpen: false,
+                modal: true,
+                show: { effect: 'fade', speed: 400 },
+                hide: { effect: 'fade', speed: 400 },
+                width: 500, minWidth: 500, maxWidth: 500,
+                height: 230, minHeight: 230, maxHeight: 230,
+                position: { my: "top", at: "top", of: window },
+                buttons: [{
+                    text: "Fermer",
+                    click: function () {
+                        holdCheckETag = false;
+                        imageIdToDelete = 0;
+                        $(this).dialog("close");
+                    }
+                }]
+            });
+
+            $("#aproposDlg").dialog({
+                title: "À propos",
+                autoOpen: false,
+                modal: true,
+                show: { effect: 'fade', speed: 400 },
+                hide: { effect: 'fade', speed: 400 },
+                width: 500, minWidth: 500, maxWidth: 500,
+                height: 300, minHeight: 300, maxHeight: 300,
+                position: { my: "top", at: "top", of: window },
+                buttons: [{
+                    text: "Fermer",
+                    click: function () {
+                        holdCheckETag = false;
+                        $(this).dialog("close");
+                    }
+                }]
+            });
+
+            $("#imageNewsDlg").dialog({
+                title: "",
+                autoOpen: false,
+                modal: true,
+                show: { effect: 'fade', speed: 400 },
+                hide: { effect: 'fade', speed: 100 },
+                width: 680,
+                minWidth: 640,
+                maxWidth: 640,
+                height: 800,
+                minHeight: 780,
+                maxHeight: 780,
+                position: { my: "top", at: "top", of: window },
+                buttons: [{
+                    text: "Fermer",
+                    click: function () {
+                        holdCheckETag = false;
+                        $(this).dialog("close");
+                        resetImageNewsDlg();
+                    }
+                }]
+            });
+
+            $(".scrollContainer").scroll(function () {
+                if ($(".scrollContainer").scrollTop() + $(".scrollContainer").innerHeight() >= $("#imagesList").height()) {
+                    getImagesList(false);
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
