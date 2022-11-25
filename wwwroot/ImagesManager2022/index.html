@@ -803,6 +803,7 @@
                     text: "Se désinscrire",
                     click: function () {
                         deleteUser();
+                        resetRegisterForm();
                         $(this).dialog("close");
                     }
                 },
@@ -826,12 +827,14 @@
                             holdCheckETag = false;
                             $(this).dialog("close");
                         }
+                        resetRegisterForm();
                     }
                 },
                 {
                     text: "Annuler",
                     click: function () {
                         holdCheckETag = false;
+                        resetRegisterForm();
                         $(this).dialog("close");
                     }
                 }]
