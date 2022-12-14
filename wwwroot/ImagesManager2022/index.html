@@ -163,6 +163,12 @@
         </div>
         <div id="imageNewsDlg">
             <div>
+              <div class="mb-2 pb-2 fs-6 border-bottom">
+                <span id="imageSectionProfil">
+                  <img src="" alt="imageProfilePic" class="profilePicture rounded-circle border" id="imageProfilePic">
+                  <span id="imageUsername"></span>
+                </span>
+              </div>
                 <div>
                     <h5 style="font-weight: bold;" id="imageTitleDlg"></h5>
                 </div>
@@ -676,12 +682,19 @@
             $("#imageDateDlg").text(convertToFrenchDate(parseInt(image.Date)));
             $("#imageDescDlg").text(image.Description);
             $("#newsImageDlg").attr("src", image.OriginalURL);
+            $("#newsImageDlg").attr("src",image.OriginalURL);
+            $("#imageUsername").text(image.Username);
+            $("#imageProfilePic").attr("src",image.AvatarURL);
+
         }
         function resetImageNewsDlg() {
             $("#imageTitleDlg").text("");
             $("#imageDateDlg").text("");
             $("#imageDescDlg").text("");
             $("#newsImageDlg").attr("src", "");
+            $("#imageUsername").text("");
+            $("#newsImageDlg").attr("src","");
+            $("#imageProfilePic").attr("src","");
         }
 
         function init_UI() {
