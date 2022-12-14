@@ -18,16 +18,12 @@
 //  We obtain:
 /*
     <div id="photo" class="imageUploader" defaultImage="images/No_Image.png" waitingImage="images/writing.gif">
-
         <div id="photo_imageContainer" class="UploadedImage" 
             style= "background-image: url('images/No_Image.png');...">
         </div>
-
         <input id="photo_ImageUploader" type=" file"style="visibility:hidden;" 
             accept="image/jpeg, image/jpg, image/gif, image/png, image/bmp, image/webp">
-
         <input id="photo_Data" style="visibility:hidden;">
-
     </div>
 */
 //
@@ -94,7 +90,7 @@ class ImageUploader {
         });
     }
     static clearImageData(id) {
-        $("#" + id).val("");
+        $(`#${id}_Data`).val("");
     }
     static getImageData(id) {
         return $(`#${id}_Data`).val();
