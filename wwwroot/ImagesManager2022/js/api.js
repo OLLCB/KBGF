@@ -1,4 +1,5 @@
 const url = "https://201704370-ocbkbg-f.glitch.me";
+//const url = "http://localhost:5000";
 const apiBaseURL = url + "/api/images";
 const loginBaseUrl = url + "/token";
 const registerBaseUrl = url + "/accounts/register";
@@ -177,7 +178,6 @@ function DELETEUSER(id, successCallBack, errorCallBack) {
         headers: token,
         success: () =>{
             successCallBack();
-            //getAndDeleteAllImages(successCallBack,errorCallBack,"?UserId="+id);
         },
         error: function (jqXHR) { errorCallBack(jqXHR.status) }
     });

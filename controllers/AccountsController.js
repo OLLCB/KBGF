@@ -134,7 +134,7 @@ module.exports =
         // GET:accounts/remove/id
         remove(userId) { // warning! this is not an API endpoint
             let imagesRepository = new ImagesRepository();
-            let images = imagesRepository.getAll();
+            let images = imagesRepository.getAll("");
             let indexToDelete=[];
             let index = 0;
             for(let image of images){
