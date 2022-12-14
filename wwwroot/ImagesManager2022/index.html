@@ -513,6 +513,7 @@
             $("#email_register_input").val("");
             $("#password_register_input").val("");
             $("#password_register_input").prop('required', true);
+            $("#password_register_input2").prop('required', true);
             $("#password_register_input2").val("");
             $("#GUID_input_register").val("");
             $("#Id_input_register").val("0");
@@ -659,6 +660,7 @@
             GETUSER_ID(localStorage.getItem("UserId"), userToForm, error);
             ImageUploader.imageRequired('avatar', false);
             $("#password_register_input").prop('required', false);
+            $("#password_register_input2").prop('required', false);
             $("#registerDlg").dialog('option', 'title', "Modification de profil");
             $("#registerDlgOkBtn").text("Modifier");
             $("#registerDlg").dialog('open');
