@@ -19,24 +19,35 @@
     <div class="mainContainer">
         <div class="headerPanel">
             <div class="container">
-                <header
-                    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
-                    <div>
-                        <img id="apropos" src="favicon.ico" alt="" data-toggle="tooltip" class="favicon" title="Gestionnaire d'images - Auteur Nicolas Chourot - Modifier par Ollyvier Caron-Blondin - Collège Lionel-Groulx">
-                        <span class="header">Gestionnaire d'images </span>
-                            <div class="cmd fa-solid fa-square-plus mx-2" id="newImageCmd" title="Ajouter une image"data-toggle="tooltip"></div>
-                            <div class="cmd fa-solid fa-arrow-down-wide-short mx-2" id="orderBy" title="Changer l'ordre d'affichage"data-toggle="tooltip"></div>
-                            <div class="cmd fa-solid fa-magnifying-glass-plus mx-2" id="searchBarBtn" title="Afficher/Cacher la barre de recherche"data-toggle="tooltip"></div>
+                <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <img id="apropos" src="favicon.ico" alt="" data-toggle="tooltip" class="favicon"
+                                title="Gestionnaire d'images - Auteur Nicolas Chourot - Modifier par Ollyvier Caron-Blondin - Collège Lionel-Groulx">
+                            <span class="header">Gestionnaire d'images </span>
+                        </div>
+                        <div class="cmd fa-solid fa-square-plus mx-2 col-1" id="newImageCmd" title="Ajouter une image"
+                            data-toggle="tooltip"></div>
+                        <div class="cmd fa-solid fa-arrow-down-wide-short mx-2 col-1" id="orderBy"
+                            title="Changer l'ordre d'affichage" data-toggle="tooltip"></div>
+                        <div class="cmd fa-solid fa-magnifying-glass-plus mx-2 col-1" id="searchBarBtn"
+                            title="Afficher/Cacher la barre de recherche" data-toggle="tooltip"></div>
                     </div>
-                    <div class="col text-end" id="loginActions">
+                    <div class="col-12 col-lg-6 text-lg-end text-center py-1" id="loginActions">
                         <span id="sectionProfil">
-                            <img src="" alt="profilePic" class="profilePicture rounded-circle border mx-2" id="profilePic">
+                            <img src="" alt="profilePic" class="profilePicture rounded-circle border mx-2"
+                                id="profilePic">
                             <span id="name" class="mx-2"></span>
                         </span>
-                        <div class="col text-danger cmd fa-solid fa-circle-exclamation mx-2" id="verifyCmd" title="Votre courriel n'est pas vérifié. Cliquer ici pour le vérifier maintenant."data-toggle="tooltip" style="font-size: 20px;"></div>
-                        <div class="col cmd fa-solid fa-right-to-bracket mx-2" id="loginCmd" title="Se connecter"data-toggle="tooltip" style="font-size: 20px;"></div>
-                        <div class="col cmd fa-solid fa-user-plus mx-2" id="registerCmd" title="S'enregistrer"data-toggle="tooltip" style="font-size: 20px;"></div>
-                        <div class="col cmd fa fa-sign-out mx-2" id="logoutCmd" title="Se déconnecter" data-toggle="tooltip" style="font-size: 20px;"></div>
+                        <div class="text-danger cmd fa-solid fa-circle-exclamation mx-2" id="verifyCmd"
+                            title="Votre courriel n'est pas vérifié. Cliquer ici pour le vérifier maintenant."
+                            data-toggle="tooltip" style="font-size: 20px;"></div>
+                        <div class="cmd fa-solid fa-right-to-bracket mx-2" id="loginCmd" title="Se connecter"
+                            data-toggle="tooltip" style="font-size: 20px;"></div>
+                        <div class="cmd fa-solid fa-user-plus mx-2" id="registerCmd" title="S'enregistrer"
+                            data-toggle="tooltip" style="font-size: 20px;"></div>
+                        <div class="cmd fa fa-sign-out mx-2" id="logoutCmd" title="Se déconnecter" data-toggle="tooltip"
+                            style="font-size: 20px;"></div>
                     </div>
                 </header>
                 <div id="searchBar">
@@ -47,7 +58,8 @@
                         <span>
                             <!-- skip a column -->
                         </span>
-                        <input list="datalistKeywords" type="search" id="searchKeywords" class="form-control" placeholder="Recherche de mots clés" />
+                        <input list="datalistKeywords" type="search" id="searchKeywords" class="form-control"
+                            placeholder="Recherche de mots clés" />
                         <datalist id="datalistKeywords">
                         </datalist>
                         <span>
@@ -101,7 +113,7 @@
         <div id="loginDlg">
             <form id="loginForm">
                 <label for="email_input">Courriel</label>
-                <input type="text" id="email_input" class="form-control" required>
+                <input type="text" id="email_input" class="form-control Email" required>
 
                 <label for="password_input">Mot de passe</label>
                 <input type="password" id="password_input" class="form-control" required>
@@ -121,7 +133,7 @@
                 <input type="text" id="username_input" class="form-control" required>
 
                 <label for="email_register_input">Courriel</label>
-                <input type="text" id="email_register_input" class="form-control" required>
+                <input type="text" id="email_register_input" class="form-control Email">
 
                 <label for="password_register_input">Mot de passe</label>
                 <input class="MatchedPassword form-control" matchedPasswordId="password_register_input2" type="password"
@@ -146,7 +158,8 @@
             </form>
         </div>
         <div id="confirmDeleteUserDlg">
-            <span id="confirmationMessageUser">Voulez-vous vraiment vous désinscrire? Vous allez perdre toutes vos images.</span>
+            <span id="confirmationMessageUser">Voulez-vous vraiment vous désinscrire? Vous allez perdre toutes vos
+                images.</span>
         </div>
         <div id="imageNewsDlg">
             <div>
@@ -154,7 +167,7 @@
                     <h5 style="font-weight: bold;" id="imageTitleDlg"></h5>
                 </div>
                 <img src="" alt="image" id="newsImageDlg" style="width: 600px;">
-                <div class="imageDate" id="imageDateDlg"></div> 
+                <div class="imageDate" id="imageDateDlg"></div>
                 <div id="imageDescDlg"></div>
             </div>
         </div>
@@ -221,20 +234,20 @@
                     queryString = `?${sortString}&offset=${0}&limit=${imagesCount}`;
                 }
                 if (!hideSearchBar) {
-                        selectedName = $("#searchName").val();
-                        let searchKeywords = $("#searchKeywords").val();
-                        if (selectedName != "")
-                            queryString += "&UserId=" + selectedName;
-                        if (searchKeywords != ""){
-                            queryString += "&Keywords=" + searchKeywords+"";
-                            let datalistWords = localStorage.getItem("datalistKeywords");
-                            if(!datalistWords.includes(searchKeywords)){
-                                datalistWords+="-"+searchKeywords;
-                                localStorage.setItem("datalistKeywords",datalistWords);
-                                addToDatalist(searchKeywords);
-                            }
+                    selectedName = $("#searchName").val();
+                    let searchKeywords = $("#searchKeywords").val();
+                    if (selectedName != "")
+                        queryString += "&UserId=" + selectedName;
+                    if (searchKeywords != "") {
+                        queryString += "&Keywords=" + searchKeywords + "";
+                        let datalistWords = localStorage.getItem("datalistKeywords");
+                        if (!datalistWords.includes(searchKeywords)) {
+                            datalistWords += "-" + searchKeywords;
+                            localStorage.setItem("datalistKeywords", datalistWords);
+                            addToDatalist(searchKeywords);
                         }
                     }
+                }
                 return queryString;
             }
             GET_ALL(refreshimagesList, error, prepareQueryString());
@@ -243,16 +256,16 @@
         function refreshimagesList(images, ETag) {
             function insertIntoImageList(image) {
                 let user = null;
-                if(localStorage.getItem("User")){
+                if (localStorage.getItem("User")) {
                     user = JSON.parse(localStorage.getItem("User"));
                 }
-                if(image.UserId == localStorage.getItem("UserId") && user.VerifyCode == "verified"){
+                if (image.UserId == localStorage.getItem("UserId") && user.VerifyCode == "verified") {
                     let imgStyle = "position: absolute;top: 32px;left: 0px; width:50px;height:50px; display:none"
-                    if(image.Shared){
+                    if (image.Shared) {
                         imgStyle = "position: absolute;top: 32px;left: 0px; width:50px;height:50px";
                     }
                     $("#imagesList").append(
-                    $(` 
+                        $(` 
                                 <div class='imageLayout'>
                                     <div class='imageHeader'>
                                         <div class="imageTitle">${image.Title}</div>
@@ -275,13 +288,13 @@
                                 </div>`)
                     );
                 }
-                else if(image.UserId == localStorage.getItem("UserId") && user.VerifyCode != "verified"){
+                else if (image.UserId == localStorage.getItem("UserId") && user.VerifyCode != "verified") {
                     let imgStyle = "position: absolute;top: 32px;left: 0px; width:50px;height:50px; display:none"
-                    if(image.Shared){
+                    if (image.Shared) {
                         imgStyle = "position: absolute;top: 32px;left: 0px; width:50px;height:50px";
                     }
                     $("#imagesList").append(
-                    $(` 
+                        $(` 
                                 <div class='imageLayout'>
                                     <div class='imageHeader'>
                                         <div class="imageTitle">${image.Title}</div>
@@ -294,8 +307,8 @@
                                 </div>`)
                     );
                 }
-                else{
-                    if(image.Shared){
+                else {
+                    if (image.Shared) {
                         $("#imagesList").append(
                             $(`
                                 <div class='imageLayout'>
@@ -308,7 +321,7 @@
                                     </div>
                                     <div class="imageDate">${convertToFrenchDate(parseInt(image.Date))}</div>
                                 </div>`)
-                                );
+                        );
                     }
                 }
             }
@@ -334,21 +347,21 @@
             $('[data-toggle="tooltip"]').tooltip();
         }
         function refreshUsersList(users) {
-            function setUserListValue(user){
+            function setUserListValue(user) {
                 let name = user.Name;
                 let selected = (selectedName == user.Id ? " selected " : "");
-                if(localStorage.getItem("UserId") != user.Id){
+                if (localStorage.getItem("UserId") != user.Id) {
                     $("#searchName").append(`<option value='${user.Id}' ${selected}>${name}</option>`);
                 }
-            }   
+            }
             $("#searchName").empty();
             $("#searchName").append("<option value=''>Toutes les usagers</option>");
-            if(localStorage.getItem("UserId")){
+            if (localStorage.getItem("UserId")) {
                 let selected = (selectedName == localStorage.getItem("UserId") ? " selected " : "");
                 $("#searchName").append(`<option value='${localStorage.getItem("UserId")}' ${selected}>Mes images</option>`);
             }
             for (let item of users) {
-                GETUSER(item.UserId,setUserListValue,error);
+                GETUSER(item.UserId, setUserListValue, error);
             }
         }
         function error(status) {
@@ -380,20 +393,20 @@
             $("#errorMessage").text(errorMessage);
             $("#errorDlg").dialog('open');
         }
-        function refreshDatalist(){
-            if(localStorage.getItem("datalistKeywords")){
+        function refreshDatalist() {
+            if (localStorage.getItem("datalistKeywords")) {
                 let datalistKeywords = localStorage.getItem("datalistKeywords").split("-");
-                for(let keyword of datalistKeywords){
+                for (let keyword of datalistKeywords) {
                     $("#datalistKeywords").append($(`<option value="${keyword}">`));
                 }
             }
-            else{
+            else {
                 let datalistKeywords = [];
-                localStorage.setItem("datalistKeywords",datalistKeywords);
+                localStorage.setItem("datalistKeywords", datalistKeywords);
             }
         }
-        function addToDatalist(keyword){
-                $("#datalistKeywords").append($(`<option value="${keyword}">`));
+        function addToDatalist(keyword) {
+            $("#datalistKeywords").append($(`<option value="${keyword}">`));
         }
 
         function newImage() {
@@ -437,7 +450,7 @@
             $("#date_input").val(Date.now());
             $("#title_input").val("");
             $("#description_input").val("");
-            $("#shared").prop("checked",false);
+            $("#shared").prop("checked", false);
             $("#hastag").val("");
             ImageUploader.resetImage('image');
         }
@@ -453,7 +466,7 @@
                     Date: parseInt($("#date_input").val()),
                     UserId: parseInt($("#Image_UserId").val()),
                     Shared: $("#shared").prop("checked"),
-                    Hashtag: $("#title_input").val() +" "+ $("#description_input").val()
+                    Hashtag: $("#title_input").val() + " " + $("#description_input").val()
                 };
                 return image;
             } else {
@@ -470,11 +483,11 @@
             $("#description_input").val(image.Description);
             ImageUploader.setImage('image', image.OriginalURL);
             $("#Image_UserId").val(image.UserId)
-            $("#shared").prop("checked",image.Shared)
+            $("#shared").prop("checked", image.Shared)
             $("#hashtag").val(image.Title + image.Description);
         }
 
-        function showAboutDlg(){
+        function showAboutDlg() {
             holdCheckETag = true;
             $("#aproposDlg").dialog('open');
         }
@@ -493,7 +506,7 @@
             $("#username_input").val("");
             $("#email_register_input").val("");
             $("#password_register_input").val("");
-            $("#password_register_input").prop('required',true);
+            $("#password_register_input").prop('required', true);
             $("#password_register_input2").val("");
             $("#GUID_input_register").val("");
             $("#Id_input_register").val("0");
@@ -571,11 +584,11 @@
             $("#registerCmd").hide();
             $("#logoutCmd").show();
 
-            if(user.VerifyCode != "verified"){
+            if (user.VerifyCode != "verified") {
                 $("#verifyCmd").show();
                 $("#newImageCmd").hide();
             }
-            else{
+            else {
                 $("#verifyCmd").hide();
                 $("#newImageCmd").show();
             }
@@ -584,6 +597,7 @@
             $("#name").show();
 
             $("#profilePic").attr("src", user.AvatarURL);
+            $('#profilePic').attr('title', user.Name);
             $("#profilePic").show();
             getImagesList(true);
         }
@@ -599,7 +613,7 @@
             $("#verifyCode_input").val("");
         }
         function setRegisterId(user) {
-            localStorage.setItem("UserId",user.Id);
+            localStorage.setItem("UserId", user.Id);
         }
         function getRegisterId() {
             return localStorage.getItem("UserId");
@@ -633,12 +647,12 @@
         }
 
         // MODIFICATION DE COMPTE
-        function modifierProfil(){
+        function modifierProfil() {
             holdCheckETag = true;
             registerMode = false;
             GETUSER_ID(localStorage.getItem("UserId"), userToForm, error);
             ImageUploader.imageRequired('avatar', false);
-            $("#password_register_input").prop('required',false);
+            $("#password_register_input").prop('required', false);
             $("#registerDlg").dialog('option', 'title', "Modification de profil");
             $("#registerDlgOkBtn").text("Modifier");
             $("#registerDlg").dialog('open');
@@ -646,28 +660,28 @@
         function deleteUser() {
             holdCheckETag = true;
             userToDelete = localStorage.getItem("UserId");
-            
+
             holdCheckETag = true;
             $("#confirmDeleteUserDlg").dialog('open');
         }
 
         // Dialog des nouvelles
-        function showNouvelleDlg(e){
+        function showNouvelleDlg(e) {
             holdCheckETag = true;
             GET_ID(e.target.getAttribute("imageid"), imageToDialog, error);
             $("#imageNewsDlg").dialog('open');
         }
-        function imageToDialog(image){
+        function imageToDialog(image) {
             $("#imageTitleDlg").text(image.Title);
             $("#imageDateDlg").text(convertToFrenchDate(parseInt(image.Date)));
             $("#imageDescDlg").text(image.Description);
-            $("#newsImageDlg").attr("src",image.OriginalURL);
+            $("#newsImageDlg").attr("src", image.OriginalURL);
         }
-        function resetImageNewsDlg(){
+        function resetImageNewsDlg() {
             $("#imageTitleDlg").text("");
             $("#imageDateDlg").text("");
             $("#imageDescDlg").text("");
-            $("#newsImageDlg").attr("src","");
+            $("#newsImageDlg").attr("src", "");
         }
 
         function init_UI() {
@@ -693,10 +707,10 @@
 
             $(".fa-magnifying-glass-plus").click(e => {
                 hideSearchBar = !hideSearchBar;
-                if (hideSearchBar){
+                if (hideSearchBar) {
                     $("#searchBar").hide();
                 }
-                else{
+                else {
                     $("#searchBar").show();
                 }
                 getImagesList();
@@ -820,14 +834,14 @@
                             else {
                                 let oldUser = JSON.parse(localStorage.getItem("User"));
                                 USERPUT(user, showUserInfo, error);
-                                if(user.Email != oldUser.Email){
+                                if (user.Email != oldUser.Email) {
                                     verifycode();
                                 }
                             }
+                            resetRegisterForm();
                             holdCheckETag = false;
                             $(this).dialog("close");
                         }
-                        resetRegisterForm();
                     }
                 },
                 {
@@ -856,10 +870,10 @@
                         let id = getRegisterId();
                         let code = getVerifyCode();
                         if (id) {
-                            if(localStorage.getItem("User")){ // Si est déja connecter (modification de son email)
+                            if (localStorage.getItem("User")) { // Si est déja connecter (modification de son email)
                                 VERIFYCODE(id, code, showUserInfo, verifycode);
                             }
-                            else{
+                            else {
                                 VERIFYCODE(id, code, login, verifycode);
                             }
                             holdCheckETag = false;
@@ -890,8 +904,8 @@
                     id: "confirmDeleteUserDlgOkBtn",
                     text: "Oui",
                     click: function () {
-                        if (userToDelete){
-                            DELETEUSER(userToDelete,logout,error);
+                        if (userToDelete) {
+                            DELETEUSER(userToDelete, logout, error);
                         }
                         userToDelete = 0;
                         holdCheckETag = false;
